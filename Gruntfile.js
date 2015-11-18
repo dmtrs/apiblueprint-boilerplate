@@ -30,7 +30,7 @@ module.exports = function(grunt){
     watch: {
       apiary: {
         files: [ 'source/*.apib' ],
-        tasks: [ 'build', 'exec:stop', 'exec:preview' ],
+        tasks: [ 'preview' ],
         options: {
           spawn: false,
           livereload: true
@@ -43,8 +43,8 @@ module.exports = function(grunt){
   });
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-exec');
-  grunt.registerTask('default', [ 'watch:apiary' ]);
+  grunt.registerTask('default', [ 'preview', 'watch:apiary' ]);
   grunt.registerTask('build',   [ 'env:dev', 'clean:apiary', 'concat' ]);
   grunt.registerTask('publish', [ 'build', 'env:dev','exec:publish' ]);
-  grunt.registerTask('preview', [ 'build', 'exec:preview' ]);
+  grunt.registerTask('preview', [ 'build','exec:stop', 'exec:preview' ]);
 }                                 
