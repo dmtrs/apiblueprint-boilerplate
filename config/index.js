@@ -1,13 +1,13 @@
 var nconf = require('nconf');
-var format = require('nconf-yaml');
 var util = require('util');
-
-var file = util.format('%s/%s.yaml', __dirname, process.env.NODE_ENV || "dev");
 
 nconf.use('memory')
   .argv()
   .env()
-  .file({ file, format })
+  .file({
+    file: util.format('%s/%s.yaml', __dirname, process.env.NODE_ENV || "dev"),
+    format: require('nconf-yaml')
+  })
   .load();
 
 module.exports = nconf;
